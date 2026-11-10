@@ -12,7 +12,7 @@ Laboratorio académico (IPLACEX) de **hardening de Linux, firewall con iptables,
 | SSH | Puerto 2222, solo claves ed25519, `PermitRootLogin no` |
 | Firewall | UFW con entrada denegada por defecto; iptables con zonas WAN/DMZ/LAN y NAT |
 | Contraseñas | `pam_pwquality`: 12 caracteres, mayúsculas, minúsculas, dígitos y símbolos |
-| HIDS | OSSEC servidor + agente Windows: alertas de creación de usuario (regla 18111, nivel 8), cambio de grupo (18233) e inicios de sesión (18107) |
+| HIDS | OSSEC servidor + agente Windows: alertas User account changed (regla 18111, nivel 8), generada al crear el usuario auditoria_hsoto, cambio de grupo (18233) e inicios de sesión (18107) |
 | NIDS | Snort con 4 reglas propias (accesos no autorizados, escaneo de puertos, shell remoto) |
 
 ## Arquitectura
