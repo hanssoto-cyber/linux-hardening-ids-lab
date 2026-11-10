@@ -1,0 +1,19 @@
+# /etc/ssh/sshd_config: cambios aplicados en ossec-hanssoto (Ubuntu 18.04.6)
+# Solo se incluyen las directivas documentadas en el informe; el resto del
+# archivo queda con los valores por defecto de la distribución.
+#
+# Requisito previo: generar un par de claves ed25519 en el cliente e instalar
+# la clave pública en el servidor ANTES de desactivar las contraseñas.
+#
+# Validar antes de reiniciar:  sudo sshd -t && sudo systemctl restart ssh
+# Probar una conexión nueva por el 2222 antes de cerrar la sesión actual:
+#   ssh -p 2222 hsoto@192.168.56.10
+
+# 1. Puerto no estándar, fuera del blanco automático de los escáneres
+Port 2222
+
+# 2. Solo autenticación por clave pública (sin contraseña)
+PasswordAuthentication no
+
+# 3. Sin inicio de sesión directo de root
+PermitRootLogin no
