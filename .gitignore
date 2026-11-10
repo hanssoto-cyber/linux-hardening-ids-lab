@@ -1,0 +1,16 @@
+# Logs y salidas de herramientas
+*.log
+
+# Claves y certificados
+*.key
+*.pem
+
+# Imágenes de máquinas virtuales
+*.ova
+*.vmdk
+
+# Informes fuente (no se publican)
+*.docx
+
+# Variables de entorno
+.env
