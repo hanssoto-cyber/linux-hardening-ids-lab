@@ -10,7 +10,7 @@ sudo lynis audit system
 ## Resultado
 | Métrica | Valor |
 |---|---|
-| Hardening index | **58 / 100** (línea base) |
+| Hardening index | **58** (valor del informe académico; la captura inicial no se conserva) |
 | Advertencias | 4 |
 | Sugerencias | 47 |
 
@@ -24,4 +24,4 @@ sudo lynis audit system
 ## Evidencia
 ![Final de la salida de "sudo lynis audit system 2>&1 | tail -30" en ossec-hanssoto: componentes, módulos, archivos de log y versión Lynis 2.6.2](../evidencias/01-evaluacion/01-lynis-auditoria-inicial.png)
 
-> Nota: esta captura muestra el final de la salida de la auditoría inicial, pero el índice 58 no aparece en ella. La cifra 58 está en el texto del informe y también en la comparación de [`lynis-despues.md`](../02-hardening/lynis-despues.md).
+> Esta captura muestra solo el final de la salida de la auditoría inicial; la parte con el índice no se conserva.

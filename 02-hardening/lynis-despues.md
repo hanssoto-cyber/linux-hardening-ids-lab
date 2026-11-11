@@ -34,8 +34,8 @@ echo "Base: 58"; echo -n "Nuevo: "; sudo grep hardening_index /var/log/lynis-rep
 
 | Antes | Después |
 |---|---|
-| 58 | **63** |
+| 58 (valor del informe académico; la captura inicial no se conserva) | **63** (medido en captura) |
 
-![Comparación en ossec-hanssoto: "Base: 58" y "Nuevo: hardening_index=63" leído de /var/log/lynis-report.dat](../evidencias/02-hardening/03-lynis-58-a-63.png)
+![En ossec-hanssoto: echo "Base: 58" (valor escrito a mano) y "Nuevo: hardening_index=63" leído de /var/log/lynis-report.dat](../evidencias/02-hardening/03-lynis-58-a-63.png)
 
 La subida de 58 a 63 refleja los controles críticos aplicados: SSH endurecido, firewall activado, servicios innecesarios deshabilitados y políticas de contraseñas.
