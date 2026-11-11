@@ -24,7 +24,7 @@ La regla 512 muestra que OSSEC mapea automáticamente sus hallazgos de rootcheck
 
 ## Prueba 2 (EV2): alertas por cambio de hora y de contraseña
 
-Servidor OSSEC en el firewall Ubuntu (`ossecubuntu`), monitoreado con `sudo tail -f /var/ossec/logs/alerts/alerts.log`.
+Las dos pruebas se hicieron en el propio servidor OSSEC, el firewall Ubuntu `ossecubuntu`, y se monitorearon con `sudo tail -f /var/ossec/logs/alerts/alerts.log`.
 
 **Cambio de hora.** La captura muestra `sudo date -s "12:00:00"` ejecutado en `ossecubuntu`. Después aparecen las alertas 5501 (`Login session opened.`), 5502 (`Login session closed.`, con la hora del log ya en `12:00:00`) y 5402 (`Successful sudo to ROOT executed`), todas de nivel 3 y con origen `/var/log/auth.log`.
 
@@ -33,5 +33,3 @@ Servidor OSSEC en el firewall Ubuntu (`ossecubuntu`), monitoreado con `sudo tail
 **Cambio de contraseña.** Regla **5555** (nivel 3), `User changed password.`, a partir de `passwd[24014]: pam_unix(passwd:chauthtok): password changed for alumno` en `/var/log/auth.log` de `ossecubuntu`. Le siguen 5502, 5402 y 5501.
 
 ![alerts.log en ossecubuntu: regla 5555 nivel 3 "User changed password." para el usuario alumno](../evidencias/03-ossec/04-ev2-alerta-cambio-contrasena.png)
-
-> Nota: el texto de EV2 dice que estos cambios se hicieron en Windows (evento 4723). Sin embargo, las dos capturas muestran alertas generadas en el propio servidor Ubuntu (`ossecubuntu->/var/log/auth.log`). Aquí se describe lo que muestran las capturas.
