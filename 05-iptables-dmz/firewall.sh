@@ -32,12 +32,11 @@ sudo iptables -A FORWARD -i enp0s9 -o enp0s3 -j ACCEPT
 sudo iptables -A FORWARD -i enp0s3 -o enp0s9 -m state --state ESTABLISHED,RELATED -j ACCEPT
 sudo iptables -t nat -L -n -v
 
-# --- 1.5 SSH solo desde la LAN -------------------------------------------------
-# NOTA: la captura de "iptables -L INPUT --line-numbers" (03-input-ssh-solo-lan.png)
-# muestra además, en la posición 3, la regla:
-#   ACCEPT tcp -- enp0s8 * 0.0.0.0/0 0.0.0.0/0 tcp dpt:22
-# (SSH aceptado desde la DMZ). El comando que la creó NO está documentado en el
-# informe, por eso no se incluye aquí.
+# --- 1.5 SSH -------------------------------------------------------------------
+# SSH aceptado desde la LAN; la captura muestra además una regla desde la DMZ
+# (enp0s8, dpt:22) cuyo comando no está documentado (03-input-ssh-lan-y-dmz.png):
+#   3  ACCEPT tcp -- enp0s8 * 0.0.0.0/0 0.0.0.0/0 tcp dpt:22
+# Ese comando no se incluye aquí.
 sudo iptables -A INPUT -i enp0s9 -s 192.168.100.0/24 -p tcp --dport 22 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 22 -j DROP
 sudo iptables -L INPUT -n -v --line-numbers

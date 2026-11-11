@@ -31,7 +31,9 @@ Se activa `net.ipv4.ip_forward = 1` y se crea la regla `MASQUERADE` de `192.168.
 
 ![Salida de sudo iptables -t nat -L -n -v: cadena POSTROUTING con MASQUERADE all, out enp0s3, source 192.168.100.0/24](../evidencias/05-iptables-dmz/02-nat-masquerade.png)
 
-## SSH solo desde la LAN
+## SSH
+SSH aceptado desde la LAN; la captura muestra además una regla desde la DMZ (enp0s8, dpt:22) cuyo comando no está documentado.
+
 ```bash
 sudo iptables -L INPUT -n -v --line-numbers
 ```
@@ -43,15 +45,11 @@ sudo iptables -L INPUT -n -v --line-numbers
 | 4 | ACCEPT | tcp | enp0s9 | 192.168.100.0/24 | tcp dpt:22 |
 | 5 | DROP | tcp | * | 0.0.0.0/0 | tcp dpt:22 |
 
-> Nota: la regla 3 (SSH aceptado por `enp0s8`, la DMZ) aparece en la captura, pero el comando que la creó no está en el informe. Con ella, el SSH también se acepta desde la DMZ.
+![Salida de sudo iptables -L INPUT -n -v --line-numbers: política DROP y reglas 1 a 5: ACCEPT tcp dpt:22 por enp0s8 (DMZ), ACCEPT tcp dpt:22 desde 192.168.100.0/24 por enp0s9 (LAN) y DROP tcp dpt:22](../evidencias/05-iptables-dmz/03-input-ssh-lan-y-dmz.png)
 
-![Salida de sudo iptables -L INPUT -n -v --line-numbers: política DROP y reglas 1 a 5, incluido ACCEPT tcp dpt:22 desde 192.168.100.0/24 por enp0s9 y DROP tcp dpt:22](../evidencias/05-iptables-dmz/03-input-ssh-solo-lan.png)
-
-Desde el Windows de la LAN (192.168.100.200) la conexión SSH con PuTTY funcionó. Desde un equipo fuera de `192.168.100.0/24`, el intento `ssh alumno@192.168.100.1` termina en `Connection timed out`:
-
-![Git Bash en un equipo fuera de la LAN: ssh alumno@192.168.100.1 responde "connect to host 192.168.100.1 port 22: Connection timed out"](../evidencias/05-iptables-dmz/04-ssh-bloqueado-fuera-lan.png)
+Desde el Windows de la LAN (192.168.100.200) la conexión SSH con PuTTY funcionó.
 
 ## ICMP entre LAN y DMZ
 Las reglas `FORWARD` permiten ICMP en ambos sentidos entre `enp0s9` (LAN) y `enp0s8` (DMZ).
 
-![Ping desde Windows en la LAN a Metasploitable 192.168.56.200: 4 enviados, 4 recibidos, 0% perdidos, TTL=63](../evidencias/05-iptables-dmz/05-ping-lan-a-dmz.png)
+![Ping desde Windows en la LAN a Metasploitable 192.168.56.200: 4 enviados, 4 recibidos, 0% perdidos, TTL=63](../evidencias/05-iptables-dmz/04-ping-lan-a-dmz.png)

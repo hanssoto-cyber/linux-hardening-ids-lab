@@ -52,8 +52,7 @@ linux-hardening-ids-lab/
 │   ├── agente-windows.md          # manage_agents, clave (NO publicar la clave real)
 │   └── alertas-probadas.md        # reglas 18111, 18233, 18107
 ├── 04-snort/
-│   ├── local.rules                # las 4 reglas personalizadas
-│   └── pruebas.md                 # ping ICMP, intento SSH, nmap 1-100
+│   └── pruebas.md                 # SID/msg de las 4 reglas; ping ICMP, intento SSH, nmap 1-100
 ├── 05-iptables-dmz/
 │   ├── firewall.sh                # script con las reglas
 │   └── topologia.md
@@ -83,7 +82,8 @@ sudo iptables -P OUTPUT ACCEPT
 sudo iptables -A INPUT -i lo -j ACCEPT
 sudo iptables -A INPUT -i enp0s3 -m state --state ESTABLISHED,RELATED -j ACCEPT
 sudo iptables -t nat -A POSTROUTING -s 192.168.100.0/24 -o enp0s3 -j MASQUERADE
-# SSH solo desde la LAN
+# SSH aceptado desde la LAN; la captura muestra además una regla desde la DMZ
+# (enp0s8, dpt:22) cuyo comando no está documentado
 sudo iptables -A INPUT -i enp0s9 -s 192.168.100.0/24 -p tcp --dport 22 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 22 -j DROP
 ```
