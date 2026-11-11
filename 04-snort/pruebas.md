@@ -7,7 +7,7 @@
 - `HOME_NET` = `192.168.56.0/24` (definida en la instalación y fijada después en `snort.conf`).
 - Interfaz de escucha: `ens34`, el adaptador conectado a la red Host-Only.
 - Antes de crear las reglas se probó la captura en modo sniffer generando tráfico ICMP. Se vio el tráfico SSH, DNS y el del agente OSSEC.
-- Reglas propias en `/etc/snort/rules/local.rules`. El texto de las reglas no se conserva; abajo están el SID y el `msg` de cada una, tal como aparecen en las alertas.
+- Reglas propias en `/etc/snort/rules/local.rules`.
 
 ```bash
 sudo snort -T -c /etc/snort/snort.conf     # cargó las 4 reglas sin errores de sintaxis
@@ -19,6 +19,8 @@ sudo snort -T -c /etc/snort/snort.conf     # cargó las 4 reglas sin errores de 
 | 1000002 | `ALERTA - Escaneo de puertos NMAP detectado` |
 | 1000003 | `ALERTA - Posible shell remoto NETCAT detectado` |
 | 1000004 | `ALERTA - Ping ICMP detectado - prueba Snort` |
+
+> El cuerpo de las reglas no se conserva; solo se documentan los SID y mensajes observados en las alertas.
 
 ## Pruebas
 Snort en modo detección con alertas por consola:
